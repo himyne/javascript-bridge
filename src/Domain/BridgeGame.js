@@ -18,6 +18,11 @@ class BridgeGame {
     if (space === SIGN.down) this.selectDownBridge(SIGN.right);
   }
 
+  stop(space) {
+    if (space === SIGN.up) this.selectUpBridge(SIGN.wrong);
+    if (space === SIGN.down) this.selectDownBridge(SIGN.wrong);
+  }
+
   selectUpBridge(sign) {
     this.upperMap.push(sign);
     this.lowerMap.push(SIGN.blank);

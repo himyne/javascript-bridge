@@ -30,6 +30,9 @@ class Controller {
       this.bridgeGame.move(space);
       this.readMoving();
     }
+    if (state === STATE.stop) {
+      this.bridgeGame.stop(space);
+    }
   }
 }
 
