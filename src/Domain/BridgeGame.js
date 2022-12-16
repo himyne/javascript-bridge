@@ -4,9 +4,13 @@ const { SIGN } = require("../Constants");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #map;
+
   constructor() {
-    this.upperMap = [];
-    this.lowerMap = [];
+    this.#map = {
+      upperMap : [],
+      lowerMap : [],
+    }
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -24,21 +28,17 @@ class BridgeGame {
   }
 
   selectUpBridge(sign) {
-    this.upperMap.push(sign);
-    this.lowerMap.push(SIGN.blank);
+    this.#map.upperMap.push(sign);
+    this.#map.lowerMap.push(SIGN.blank);
   }
 
   selectDownBridge(sign) {
-    this.upperMap.push(SIGN.blank);
-    this.lowerMap.push(sign);
+    this.#map.upperMap.push(SIGN.blank);
+    this.#map.lowerMap.push(sign);
   }
 
-  getUpperMap() {
-    return this.upperMap;
-  }
-
-  getLowerMap() {
-    return this.lowerMap;
+  getMap() {
+    return this.#map;
   }
 
   /**
