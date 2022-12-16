@@ -6,8 +6,9 @@ class Bridge {
   readBridgeSize() {
     InputView.readBridgeSize((size) => {
       this.#size = size;
+      console.log(this.#size)
     })
-  }  
+  } 
 }
 
 module.exports = Bridge;
