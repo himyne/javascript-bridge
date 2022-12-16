@@ -8,7 +8,7 @@ class Bridge {
   readBridgeSize() {
     InputView.readBridgeSize((size) => {
       this.#size = size;
-      this.makeAnswerBridge()
+      this.readMoving();
     })
   }
 
@@ -17,6 +17,11 @@ class Bridge {
     return answerBridge;
   }
   
+  readMoving() {
+    InputView.readMoving((space) => {
+      console.log(space)
+    })
+  }
 }
 
 module.exports = Bridge;
