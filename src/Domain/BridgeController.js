@@ -40,35 +40,35 @@ class Controller {
 
   handleMove(space) {
     this.bridgeGame.move(space);
-    OutputView.printMap(this.bridgeGame.getMap());
+    OutputView.printMap(this.getResult());
     this.readMoving();
   }
 
   handleStop(space) {
     this.bridgeGame.stop(space);
-    OutputView.printMap(this.bridgeGame.getMap());
+    OutputView.printMap(this.getResult());
     this.readGameCommand();
   }
 
   handleSuccess(space, state) {
     this.bridgeGame.move(space);
-    OutputView.printMap(this.bridgeGame.getMap());
-    OutputView.printResult(this.bridgeGame.getMap(), state, this.attemptNumber);
+    OutputView.printMap(this.getResult());
+    OutputView.printResult(this.getResult(), state, this.attemptNumber);
   }
 
   handleRestart() {
     this.bridgeGame.retry();
     this.attemptNumber += 1;
-    this.bridge.setState();
+    this.bridge.initBridgeIndex();
     this.readMoving();
   }
 
+  getResult() {
+    return this.bridgeGame.getMap();
+  }
+
   handleQuit() {
-    OutputView.printResult(
-      this.bridgeGame.getMap(),
-      STATE.stop,
-      this.attemptNumber
-    );
+    OutputView.printResult(this.getResult(), STATE.stop, this.attemptNumber);
   }
 }
 

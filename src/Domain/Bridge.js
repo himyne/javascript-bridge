@@ -14,14 +14,12 @@ class Bridge {
     if (this.#answerBridge[this.#bridgeIndex] !== space) return STATE.stop;
     if (this.#answerBridge[this.#bridgeIndex] === space) {
       this.#bridgeIndex++;
-      if (this.#bridgeIndex === this.#answerBridge.length) {
-        return STATE.success;
-      }
+      if (this.#bridgeIndex === this.#answerBridge.length) return STATE.success;
       return STATE.move;
     }
   }
 
-  setState() {
+  initBridgeIndex() {
     this.#bridgeIndex = 0;
   }
 }
