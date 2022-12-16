@@ -1,3 +1,5 @@
+const { makeBridge } = require("../BridgeMaker");
+const { generate } = require("../BridgeRandomNumberGenerator");
 const InputView = require("../View/InputView");
 
 class Bridge {
@@ -6,9 +8,15 @@ class Bridge {
   readBridgeSize() {
     InputView.readBridgeSize((size) => {
       this.#size = size;
-      console.log(this.#size)
+      this.makeAnswerBridge()
     })
-  } 
+  }
+
+  makeAnswerBridge() {
+    const answerBridge = makeBridge(this.#size, generate)
+    return answerBridge;
+  }
+  
 }
 
 module.exports = Bridge;
