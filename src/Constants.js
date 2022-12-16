@@ -4,6 +4,7 @@ const OUTPUT = {
 
 const INPUT_QUERY = {
   bridge_size: '다리의 길이를 입력해주세요.\n',
+  moving_space: '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n'
 }
 
 const PREFIX = '[ERROR]'
