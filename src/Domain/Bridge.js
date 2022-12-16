@@ -1,26 +1,24 @@
-const { makeBridge } = require("../BridgeMaker");
-const { generate } = require("../BridgeRandomNumberGenerator");
-const InputView = require("../View/InputView");
+const { STATE } = require("../Constants");
 
 class Bridge {
-  #size;
+  #answerBridge;
+  #bridgeIndex;
 
-  readBridgeSize() {
-    InputView.readBridgeSize((size) => {
-      this.#size = size;
-      this.readMoving();
-    })
+  constructor(answerBridge) {
+    this.#answerBridge = answerBridge;
+    console.log(this.#answerBridge)
+    this.#bridgeIndex = 0;
   }
 
-  makeAnswerBridge() {
-    const answerBridge = makeBridge(this.#size, generate)
-    return answerBridge;
-  }
-  
-  readMoving() {
-    InputView.readMoving((space) => {
-      console.log(space)
-    })
+  getState(space) {
+    if (this.#answerBridge[this.#bridgeIndex] !== space) return STATE.stop;
+    if (this.#answerBridge[this.#bridgeIndex] === space) {
+      this.#bridgeIndex++;
+      if (this.#bridgeIndex === this.#answerBridge.length) {
+        return STATE.success;
+      }
+      return STATE.move;
+    }
   }
 }
 

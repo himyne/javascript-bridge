@@ -15,4 +15,10 @@ const ERROR = {
   not_up_or_down: `${PREFIX} U나 D만 올 수 있습니다.`
 }
 
-module.exports = { OUTPUT, INPUT_QUERY, ERROR };
+const STATE = {
+  stop: '실패',
+  move: '이동',
+  success: '성공',
+}
+
+module.exports = { OUTPUT, INPUT_QUERY, ERROR, STATE };
