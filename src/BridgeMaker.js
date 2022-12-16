@@ -1,3 +1,5 @@
+const { SIGN } = require("./Constants");
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -11,7 +13,7 @@ const BridgeMaker = {
     const answerBridge = Array(+size)
       .fill("")
       .map((space) => space + generateRandomNumber());
-    return answerBridge.map((space) => (space === '1' ? "U" : "D"));
+    return answerBridge.map((space) => (space === SIGN.one ? SIGN.up : SIGN.down));
   },
 };
 module.exports = BridgeMaker;

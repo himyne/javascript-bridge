@@ -34,6 +34,7 @@ const SIGN = {
   down: 'D',
   restart: 'R',
   done: 'D',
+  one: '1',
 }
 
 module.exports = { OUTPUT, INPUT_QUERY, ERROR, STATE, SIGN};
