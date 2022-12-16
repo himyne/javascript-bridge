@@ -1,3 +1,5 @@
+const { SIGN } = require("../Constants");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -12,14 +14,18 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(space) {
-    if(space === 'U'){
-      this.upperMap.push('O');
-      this.lowerMap.push(' ');
-    }
-    if(space === 'D') {
-      this.upperMap.push(' ');
-      this.lowerMap.push('O');
-    }
+    if (space === SIGN.up) this.selectUpBridge(SIGN.right);
+    if (space === SIGN.down) this.selectDownBridge(SIGN.right);
+  }
+
+  selectUpBridge(sign) {
+    this.upperMap.push(sign);
+    this.lowerMap.push(SIGN.blank);
+  }
+
+  selectDownBridge(sign) {
+    this.upperMap.push(SIGN.blank);
+    this.lowerMap.push(sign);
   }
 
   /**

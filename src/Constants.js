@@ -21,4 +21,12 @@ const STATE = {
   success: '성공',
 }
 
-module.exports = { OUTPUT, INPUT_QUERY, ERROR, STATE };
+const SIGN = {
+  right: 'O',
+  wrong: 'X',
+  blank: ' ',
+  up: 'U',
+  down: 'D',
+}
+
+module.exports = { OUTPUT, INPUT_QUERY, ERROR, STATE, SIGN};
