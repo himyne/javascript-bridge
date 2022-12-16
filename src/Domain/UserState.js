@@ -6,7 +6,6 @@ class UserState {
 
   constructor(answerBridge) {
     this.#answerBridge = answerBridge;
-    console.log(this.#answerBridge)
     this.#bridgeIndex = 0;
   }
 
