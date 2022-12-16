@@ -3,7 +3,7 @@ const { generate } = require("../BridgeRandomNumberGenerator");
 const { STATE, SIGN } = require("../Constants");
 const InputView = require("../View/InputView");
 const OutputView = require("../View/OutputView");
-const Bridge = require("./Bridge");
+const UserState = require("./UserState");
 const BridgeGame = require("./BridgeGame");
 
 class Controller {
@@ -15,14 +15,14 @@ class Controller {
 
   readBridgeSize() {
     InputView.readBridgeSize((size) => {
-      this.bridge = new Bridge(makeBridge(size, generate));
+      this.userState = new UserState(makeBridge(size, generate));
       this.readMoving();
     });
   }
 
   readMoving() {
     InputView.readMoving((space) => {
-      this.decideMoveOrStop(this.bridge.getState(space), space);
+      this.decideMoveOrStop(this.userState.getState(space), space);
     });
   }
 
@@ -59,7 +59,7 @@ class Controller {
   handleRestart() {
     this.bridgeGame.retry();
     this.attemptNumber += 1;
-    this.bridge.initBridgeIndex();
+    this.userState.initBridgeIndex();
     this.readMoving();
   }
 

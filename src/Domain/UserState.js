@@ -1,6 +1,6 @@
 const { STATE } = require("../Constants");
 
-class Bridge {
+class UserState {
   #answerBridge;
   #bridgeIndex;
 
@@ -24,4 +24,4 @@ class Bridge {
   }
 }
 
-module.exports = Bridge;
+module.exports = UserState;
