@@ -31,7 +31,11 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(readGameCommandCallback) {
+    Console.readLine(INPUT_QUERY.game_restart, (command) => {
+      readGameCommandCallback(command)
+    })
+  },
 };
 
 module.exports = InputView;
