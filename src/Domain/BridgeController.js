@@ -9,6 +9,7 @@ const BridgeGame = require("./BridgeGame");
 class Controller {
 
   constructor() {
+    OutputView.printStart();
     this.bridgeGame = new BridgeGame();
   }
 
@@ -27,13 +28,14 @@ class Controller {
 
   readGameCommand() {
     InputView.readGameCommand((command) => {
-      this.bridgeGame.retry(command);
+      
     })
   }
 
   decideMoveOrStop(state, space) {
     if (state === STATE.move) this.handleMove(space);
     if (state === STATE.stop) this.handleStop(space);
+    if (state === STATE.success) this.handleSuccess(space, state);
   }
 
   handleMove(space) {
@@ -48,9 +50,14 @@ class Controller {
     this.readGameCommand();
   }
 
+  handleSuccess(space, state) {
+    this.bridgeGame.move(space);
+    OutputView.printMap(this.bridgeGame.getMap())
+    OutputView.printResult(this.bridgeGame.getMap(), state);
+  }
+
   showResult(){
-    const bridgeMap = Object.values(this.bridgeGame.getMap())
-    OutputView.printMap(bridgeMap);
+    OutputView.printMap(this.bridgeGame.getMap());
   }
 }
 

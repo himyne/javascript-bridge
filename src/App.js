@@ -1,12 +1,9 @@
-const Bridge = require("./Domain/Bridge");
-const OutputView = require("./View/OutputView");
+const Controller = require("./Domain/BridgeController");
 
 class App {
   play() {
-    OutputView.printStart();
-
-    const bridge = new Bridge();
-    bridge.readBridgeSize();
+    const controller = new Controller();
+    controller.readBridgeSize();
   }
 }
 

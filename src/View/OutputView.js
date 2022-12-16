@@ -13,8 +13,9 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(bridgeMap) {
-    Console.print(bridgeMap[0])
-    Console.print(bridgeMap[1])
+    bridgeMap = Object.values(bridgeMap);
+    Console.print(`[ ${bridgeMap[0].join(' | ')} ]`)
+    Console.print(`[ ${bridgeMap[1].join(' | ')} ]`)
   },
 
   /**
@@ -22,7 +23,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(bridgeMap, succesOrFail) {
+    Console.print(OUTPUT.result_title);
+    this.printMap(bridgeMap);
+    Console.print(`${OUTPUT.success_or_fail}${succesOrFail}`);
+  },
 };
 
 module.exports = OutputView;
