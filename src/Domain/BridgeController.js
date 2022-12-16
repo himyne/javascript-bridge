@@ -7,15 +7,14 @@ const Bridge = require("./Bridge");
 const BridgeGame = require("./BridgeGame");
 
 class Controller {
-  #size;
+
   constructor() {
     this.bridgeGame = new BridgeGame();
   }
 
   readBridgeSize() {
     InputView.readBridgeSize((size) => {
-      this.#size = size;
-      this.bridge = new Bridge(makeBridge(this.#size, generate));
+      this.bridge = new Bridge(makeBridge(size, generate));
       this.readMoving();
     });
   }
@@ -24,6 +23,12 @@ class Controller {
     InputView.readMoving((space) => {
       this.decideMoveOrStop(this.bridge.getState(space), space);
     });
+  }
+
+  readGameCommand() {
+    InputView.readGameCommand((command) => {
+      this.bridgeGame.retry(command);
+    })
   }
 
   decideMoveOrStop(state, space) {
@@ -40,13 +45,12 @@ class Controller {
   handleStop(space) {
     this.bridgeGame.stop(space);
     this.showResult();
+    this.readGameCommand();
   }
 
   showResult(){
-    OutputView.printMap(
-      this.bridgeGame.getUpperMap(),
-      this.bridgeGame.getLowerMap()
-    );
+    const bridgeMap = Object.values(this.bridgeGame.getMap())
+    OutputView.printMap(bridgeMap);
   }
 }
 
