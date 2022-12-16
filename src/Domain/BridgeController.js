@@ -2,6 +2,7 @@ const { makeBridge } = require("../BridgeMaker");
 const { generate } = require("../BridgeRandomNumberGenerator");
 const { STATE } = require("../Constants");
 const InputView = require("../View/InputView");
+const OutputView = require("../View/OutputView");
 const Bridge = require("./Bridge");
 const BridgeGame = require("./BridgeGame");
 
@@ -26,13 +27,26 @@ class Controller {
   }
 
   decideMoveOrStop(state, space) {
-    if (state === STATE.move) {
-      this.bridgeGame.move(space);
-      this.readMoving();
-    }
-    if (state === STATE.stop) {
-      this.bridgeGame.stop(space);
-    }
+    if (state === STATE.move) this.handleMove(space);
+    if (state === STATE.stop) this.handleStop(space);
+  }
+
+  handleMove(space) {
+    this.bridgeGame.move(space);
+    this.showResult();
+    this.readMoving();
+  }
+
+  handleStop(space) {
+    this.bridgeGame.stop(space);
+    this.showResult();
+  }
+
+  showResult(){
+    OutputView.printMap(
+      this.bridgeGame.getUpperMap(),
+      this.bridgeGame.getLowerMap()
+    );
   }
 }
 
