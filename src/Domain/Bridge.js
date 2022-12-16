@@ -20,6 +20,10 @@ class Bridge {
       return STATE.move;
     }
   }
+
+  setState() {
+    this.#bridgeIndex = 0;
+  }
 }
 
 module.exports = Bridge;

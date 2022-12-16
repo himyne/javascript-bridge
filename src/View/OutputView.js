@@ -1,11 +1,11 @@
-const { Console } = require('@woowacourse/mission-utils'); 
-const { OUTPUT } = require('../Constants');
+const { Console } = require("@woowacourse/mission-utils");
+const { OUTPUT } = require("../Constants");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
   printStart() {
-    Console.print(OUTPUT.start)
+    Console.print(OUTPUT.start);
   },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
@@ -14,8 +14,8 @@ const OutputView = {
    */
   printMap(bridgeMap) {
     bridgeMap = Object.values(bridgeMap);
-    Console.print(`[ ${bridgeMap[0].join(' | ')} ]`)
-    Console.print(`[ ${bridgeMap[1].join(' | ')} ]`)
+    Console.print(`[ ${bridgeMap[0].join(" | ")} ]`);
+    Console.print(`[ ${bridgeMap[1].join(" | ")} ]`);
   },
 
   /**
@@ -23,10 +23,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(bridgeMap, succesOrFail) {
+  printResult(bridgeMap, succesOrFail, attemptNumber) {
     Console.print(OUTPUT.result_title);
     this.printMap(bridgeMap);
     Console.print(`${OUTPUT.success_or_fail}${succesOrFail}`);
+    Console.print(`${OUTPUT.total_attempt_number}${attemptNumber}`);
+    Console.close();
   },
 };
 

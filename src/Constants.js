@@ -2,7 +2,7 @@ const OUTPUT = {
   start: "다리 건너기 게임을 시작합니다.\n",
   result_title: '\n최종 게임 결과',
   success_or_fail: '\n게임 성공 여부: ',
-  total_attempt_number: '\n총 시도한 횟수: ',
+  total_attempt_number: '총 시도한 횟수: ',
 };
 
 const INPUT_QUERY = {
@@ -32,6 +32,8 @@ const SIGN = {
   blank: ' ',
   up: 'U',
   down: 'D',
+  restart: 'R',
+  done: 'D',
 }
 
 module.exports = { OUTPUT, INPUT_QUERY, ERROR, STATE, SIGN};
