@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { INPUT_QUERY } = require("../Constants");
 const { catchError } = require("../util");
-const { checkBridgeSize, checkMovingSpace } = require("../Validation");
+const { checkBridgeSize, checkMovingSpace, checkGameCommand } = require("../Validation");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -33,6 +33,8 @@ const InputView = {
    */
   readGameCommand(readGameCommandCallback) {
     Console.readLine(INPUT_QUERY.game_restart, (command) => {
+      command = catchError(command, checkGameCommand);
+      if (!command) return this.readGameCommand(readGameCommandCallback);
       readGameCommandCallback(command)
     })
   },

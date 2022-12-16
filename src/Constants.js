@@ -13,7 +13,8 @@ const ERROR = {
   not_number : `${PREFIX} 숫자를 입력해주세요`,
   out_of_range: `${PREFIX} 다리 길이는 3~20 사이의 숫자여야 합니다.`,
   blank: `${PREFIX} 숫자 사이에 공백이 있습니다.`,
-  not_up_or_down: `${PREFIX} U나 D만 올 수 있습니다.`
+  not_up_or_down: `${PREFIX} U나 D만 올 수 있습니다.`,
+  not_restart_or_done: `${PREFIX} R과 Q만 올 수 있습니다.`,
 }
 
 const STATE = {
