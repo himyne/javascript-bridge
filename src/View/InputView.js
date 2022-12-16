@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { INPUT_QUERY } = require('../Constants');
-const Validation = require('../Validation');
+const { catchError } = require('../util');
+const { checkBridgeSize } = require('../Validation');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -10,7 +11,8 @@ const InputView = {
    */
   readBridgeSize(readBridgeSizeCallback) {
     Console.readLine(INPUT_QUERY.bridge_size, (size) => {
-      size = Validation.checkBridgeSize(size);
+      size = catchError(size, checkBridgeSize);
+      if(!size) return this.readBridgeSize(readBridgeSizeCallback);
       readBridgeSizeCallback(size);
     })
   },
