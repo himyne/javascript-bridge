@@ -1,0 +1,75 @@
+const { makeBridge } = require("../BridgeMaker");
+const { generate } = require("../BridgeRandomNumberGenerator");
+const { STATE, SIGN } = require("../Constants");
+const InputView = require("../View/InputView");
+const OutputView = require("../View/OutputView");
+const UserState = require("./UserState");
+const BridgeGame = require("./BridgeGame");
+
+class Controller {
+  constructor() {
+    OutputView.printStart();
+    this.bridgeGame = new BridgeGame();
+    this.attemptNumber = 1;
+  }
+
+  readBridgeSize() {
+    InputView.readBridgeSize((size) => {
+      this.userState = new UserState(makeBridge(size, generate));
+      this.readMoving();
+    });
+  }
+
+  readMoving() {
+    InputView.readMoving((space) => {
+      this.decideMoveOrStop(this.userState.getState(space), space);
+    });
+  }
+
+  readGameCommand() {
+    InputView.readGameCommand((command) => {
+      command === SIGN.restart ? this.handleRestart() : this.handleQuit();
+    });
+  }
+
+  decideMoveOrStop(state, space) {
+    if (state === STATE.move) this.handleMove(space);
+    if (state === STATE.stop) this.handleStop(space);
+    if (state === STATE.success) this.handleSuccess(space, state);
+  }
+
+  handleMove(space) {
+    this.bridgeGame.move(space);
+    OutputView.printMap(this.getResult());
+    this.readMoving();
+  }
+
+  handleStop(space) {
+    this.bridgeGame.stop(space);
+    OutputView.printMap(this.getResult());
+    this.readGameCommand();
+  }
+
+  handleSuccess(space, state) {
+    this.bridgeGame.move(space);
+    OutputView.printMap(this.getResult());
+    OutputView.printResult(this.getResult(), state, this.attemptNumber);
+  }
+
+  handleRestart() {
+    this.bridgeGame.retry();
+    this.attemptNumber += 1;
+    this.userState.initBridgeIndex();
+    this.readMoving();
+  }
+
+  getResult() {
+    return this.bridgeGame.getMap();
+  }
+
+  handleQuit() {
+    OutputView.printResult(this.getResult(), STATE.stop, this.attemptNumber);
+  }
+}
+
+module.exports = Controller;
